@@ -20,6 +20,26 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Negidhaba
+
+This repository contains the Negidhaba single-page experience: a nostalgic illustrated dhaba with a YouTube-powered music player.
+
+Key points:
+- Stack: Next.js 16 (App Router), TypeScript, Tailwind CSS, Zustand for state
+- Music playback: YouTube IFrame Player API used as an audio engine (hidden iframe). See `components/music/YouTubePlayer.tsx` and `lib/music/youtube.ts`.
+- Playlist: `lib/music/playlist.ts`
+
+Adding songs: edit `lib/music/playlist.ts` and add entries with `videoId`.
+
+Background illustration: replace `public/images/negidhaba-bg.svg` with a richer `negidhaba-bg.webp` or `svg` of your choice.
+
+Local dev:
+```bash
+pnpm install
+pnpm dev
+```
+
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
