@@ -27,9 +27,19 @@ This repository contains the Negidhaba single-page experience: a nostalgic illus
 Key points:
 - Stack: Next.js 16 (App Router), TypeScript, Tailwind CSS, Zustand for state
 - Music playback: YouTube IFrame Player API used as an audio engine (hidden iframe). See `components/music/YouTubePlayer.tsx` and `lib/music/youtube.ts`.
-- Playlist: `lib/music/playlist.ts`
+- Playlist: a public YouTube playlist loaded through `app/api/playlist/route.ts`
 
-Adding songs: edit `lib/music/playlist.ts` and add entries with `videoId`.
+Create a public YouTube playlist, then add these values to `.env.local`:
+
+```bash
+YOUTUBE_API_KEY=your_google_api_key
+YOUTUBE_PLAYLIST_ID=the_id_from_your_youtube_playlist_url
+```
+
+Enable YouTube Data API v3 for the Google Cloud project that owns the API key. The
+player uses the configured playlist directly and reports an error if it cannot be
+loaded. The API route caches results for five minutes, follows all playlist pages,
+and enriches each item with its channel, description, thumbnail, and duration.
 
 Background illustration: replace `public/images/negidhaba-bg.svg` with a richer `negidhaba-bg.webp` or `svg` of your choice.
 

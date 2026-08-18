@@ -1,5 +1,5 @@
-import {create} from "zustand";
-import { PLAYLIST, Track } from "@/lib/music/playlist";
+import { create } from "zustand";
+import type { Track } from "@/lib/music/playlist";
 
 type State = {
   playlist: Track[];
@@ -8,50 +8,58 @@ type State = {
   currentTime: number;
   duration: number;
   volume: number;
-  isReady: boolean;
   playerError?: string | null;
-  // actions
+  seekRequest: number | null;
   play: () => void;
   pause: () => void;
   togglePlay: () => void;
-  next: () => void;
-  previous: () => void;
-  selectTrack: (index: number) => void;
+  next: (autoplay?: boolean) => void;
+  previous: (autoplay?: boolean) => void;
+  selectTrack: (index: number, autoplay?: boolean) => void;
   seek: (time: number) => void;
-  setReady: (v: boolean) => void;
+  clearSeekRequest: () => void;
   setTime: (t: number, d?: number) => void;
+  setPlaying: (v: boolean) => void;
   setVolume: (v: number) => void;
   setError: (e?: string | null) => void;
+  setPlaylist: (playlist: Track[]) => void;
 };
 
-export const useMusicStore = create<State>((set, get) => ({
-  playlist: PLAYLIST,
+export const useMusicStore = create<State>((set) => ({
+  playlist: [],
   currentTrackIndex: 0,
   isPlaying: false,
   currentTime: 0,
   duration: 0,
   volume: 0.8,
-  isReady: false,
   playerError: null,
+  seekRequest: null,
   play: () => set({ isPlaying: true }),
   pause: () => set({ isPlaying: false }),
   togglePlay: () => set((s) => ({ isPlaying: !s.isPlaying })),
-  next: () => {
+  next: (autoplay = true) => {
     set((s) => {
+      if (s.playlist.length === 0) return s;
       const nextIndex = (s.currentTrackIndex + 1) % s.playlist.length;
-      return { currentTrackIndex: nextIndex, currentTime: 0, duration: 0, isPlaying: true };
+      return { currentTrackIndex: nextIndex, currentTime: 0, duration: 0, isPlaying: autoplay };
     });
   },
-  previous: () => {
+  previous: (autoplay = true) => {
     set((s) => {
+      if (s.playlist.length === 0) return s;
       const prev = (s.currentTrackIndex - 1 + s.playlist.length) % s.playlist.length;
-      return { currentTrackIndex: prev, currentTime: 0, duration: 0, isPlaying: true };
+      return { currentTrackIndex: prev, currentTime: 0, duration: 0, isPlaying: autoplay };
     });
   },
-  selectTrack: (index: number) => set({ currentTrackIndex: index, currentTime: 0, duration: 0, isPlaying: true }),
-  seek: (time: number) => set({ currentTime: time }),
-  setReady: (v: boolean) => set({ isReady: v }),
+  selectTrack: (index: number, autoplay = true) => set({ currentTrackIndex: index, currentTime: 0, duration: 0, isPlaying: autoplay }),
+  seek: (time: number) => set({ seekRequest: time }),
+  clearSeekRequest: () => set({ seekRequest: null }),
   setTime: (t: number, d?: number) => set((s) => ({ currentTime: t, duration: d ?? s.duration })),
+  setPlaying: (v: boolean) => set({ isPlaying: v }),
   setVolume: (v: number) => set({ volume: v }),
   setError: (e?: string | null) => set({ playerError: e ?? null }),
+  setPlaylist: (playlist) => {
+    if (playlist.length === 0) return;
+    set({ playlist, currentTrackIndex: 0, currentTime: 0, duration: 0 });
+  },
 }));

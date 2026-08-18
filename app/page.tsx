@@ -8,17 +8,17 @@ import YouTubePlayer from "@/components/music/YouTubePlayer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-amber-50 text-foreground">
+    <div className="min-h-screen relative bg-amber-50">
       <NoiseOverlay />
-      <header className="fixed top-4 left-0 right-0 flex items-center justify-between px-6">
-        <div className="flex items-center gap-4">
+      <header className="fixed my-4 top-4 left-0 right-0 max-w-3xl mx-auto flex items-center justify-between px-4 z-10">
+        <div className="flex items-center gap-4 text-zinc-700">
           <TimeDisplay />
           <OnlineCounter />
         </div>
         <SocialLinks />
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center">
+      <main className="absolute inset-0 flex flex-col items-center justify-center">
         <DhabaHero />
       </main>
 
