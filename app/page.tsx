@@ -8,7 +8,7 @@ import YouTubePlayer from "@/components/music/YouTubePlayer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen relative bg-amber-50">
+    <div className="min-h-screen w-full relative bg-amber-50">
       <NoiseOverlay />
       <header className="fixed my-4 top-4 left-0 right-0 max-w-3xl mx-auto flex items-center justify-between px-4 z-10">
         <div className="flex items-center gap-4 text-zinc-700">

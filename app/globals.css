@@ -34,6 +34,16 @@ body {
 /* Player surface */
 .player-surface { background: rgba(255,255,255,0.6); }
 
+kbd {
+  border: 1px solid rgba(255, 237, 213, 0.25);
+  border-bottom-width: 2px;
+  border-radius: 0.25rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff7ed;
+  padding: 0.1rem 0.3rem;
+  white-space: nowrap;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }

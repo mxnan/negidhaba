@@ -63,6 +63,18 @@ export default function MusicPlayer() {
         </div>
       )}
       <ProgressBar />
+      <details className="group border-t border-amber-100/15 pt-2 text-xs text-amber-100/70">
+        <summary className="cursor-pointer list-none text-center transition hover:text-white [&::-webkit-details-marker]:hidden">
+          <span className="group-open:hidden">Show controls</span>
+          <span className="hidden group-open:inline">Hide controls</span>
+        </summary>
+        <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 text-center sm:grid-cols-4">
+          <span><kbd>Space</kbd> play/pause</span>
+          <span><kbd>← →</kbd> seek 5s</span>
+          <span><kbd>↑ ↓</kbd> volume</span>
+          <span><kbd>N / P</kbd> next/previous</span>
+        </div>
+      </details>
     </div>
   );
 }
