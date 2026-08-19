@@ -1,5 +1,6 @@
 "use client";
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
 import { useMusicStore } from "@/store/music-store";
 
 function formatTime(t: number) {
@@ -103,7 +104,7 @@ export default function ProgressBar() {
   );
 
   return (
-    <div className="flex items-center gap-2 text-xs text-amber-100/70 select-none">
+    <div className="flex select-none items-center gap-2 text-xs text-background/85">
       <span className="w-10 text-right tabular-nums">{formatTime(displayTime)}</span>
 
       <div
@@ -123,19 +124,21 @@ export default function ProgressBar() {
         onKeyDown={handleKeyDown}
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
-        className={`relative flex-1 h-2 rounded-full bg-white/10 touch-none ${
+        className={`relative h-2 flex-1 touch-none rounded-full bg-background/25 ${
           seekable ? "cursor-pointer" : "cursor-default opacity-50"
         }`}
       >
-        <div
-          className="absolute left-0 top-0 h-full rounded-full bg-amber-500 pointer-events-none"
-          style={{ width: `${pct}%` }}
+        <motion.div
+          className="pointer-events-none absolute left-0 top-0 h-full rounded-full bg-mustard"
+          animate={{ width: `${pct}%` }}
+          transition={{ type: "spring", stiffness: 420, damping: 42, mass: 0.35 }}
         />
-        <div
-          className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-amber-300 shadow pointer-events-none transition-opacity ${
+        <motion.div
+          className={`pointer-events-none absolute left-0 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-mustard shadow ${
             hovering || dragTime !== null ? "opacity-100" : "opacity-0"
           }`}
-          style={{ left: `${pct}%` }}
+          animate={{ left: `${pct}%`, scale: dragTime !== null ? 1.25 : 1 }}
+          transition={{ type: "spring", stiffness: 500, damping: 30 }}
         />
       </div>
 

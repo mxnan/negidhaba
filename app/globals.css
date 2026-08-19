@@ -13,33 +13,32 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-deep-maroon: var(--accent-deep-maroon);
+  --color-burnt-orange: var(--accent-burnt-orange);
+  --color-mustard: var(--accent-mustard);
+  --color-earth: var(--accent-earth);
+  --color-muted-green: var(--muted-green);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-display: var(--font-devanagari);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans);
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 /* Player surface */
-.player-surface { background: rgba(255,255,255,0.6); }
+.player-surface { background: color-mix(in srgb, var(--background) 60%, transparent); }
 
 kbd {
-  border: 1px solid rgba(255, 237, 213, 0.25);
+  border: 1px solid color-mix(in srgb, var(--accent-mustard) 55%, transparent);
   border-bottom-width: 2px;
   border-radius: 0.25rem;
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff7ed;
+  background: var(--accent-deep-maroon);
+  color: var(--background);
   padding: 0.1rem 0.3rem;
   white-space: nowrap;
 }
