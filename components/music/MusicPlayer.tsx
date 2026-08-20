@@ -47,7 +47,7 @@ export default function MusicPlayer() {
       initial={{ opacity: 0, y: 28, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ type: "spring", stiffness: 260, damping: 24 }}
-      className="fixed bottom-4 left-1/2 z-10 flex max-w-xl -translate-x-1/2 flex-col gap-3 rounded-2xl border border-mustard/25 bg-deep-maroon/90 p-4 text-background shadow-lg backdrop-blur-xl sm:bottom-6 sm:w-[min(980px,92%)]"
+      className="fixed bottom-4 left-1/2 z-10 flex w-[calc(100%-2rem)] min-w-0 max-w-2xl -translate-x-1/2 flex-col gap-3 rounded-2xl border border-mustard/25 bg-deep-maroon/90 p-4 text-background shadow-lg backdrop-blur-xl sm:bottom-6 sm:w-[calc(100%-3rem)]"
     >
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 min-w-0 flex-1">
